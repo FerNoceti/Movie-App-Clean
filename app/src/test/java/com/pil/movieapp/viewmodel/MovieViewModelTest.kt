@@ -70,8 +70,8 @@ class MovieViewModelTest {
 
         // Then
         assertEquals(
-            MovieViewModel.MainData(
-                MovieViewModel.MainStatus.SHOW_INFO,
+            MovieViewModel.MovieData(
+                MovieViewModel.MovieStatus.SHOW_INFO,
                 movies
             ),
             testObserver.observedValues[0]
@@ -89,8 +89,8 @@ class MovieViewModelTest {
 
         // Then
         assertEquals(
-            MovieViewModel.MainData(
-                MovieViewModel.MainStatus.EMPTY,
+            MovieViewModel.MovieData(
+                MovieViewModel.MovieStatus.EMPTY,
                 emptyList()
             ),
             testObserver.observedValues[0]
@@ -107,8 +107,8 @@ class MovieViewModelTest {
 
         // Then
         assertEquals(
-            MovieViewModel.MainData(
-                MovieViewModel.MainStatus.GO_BACK,
+            MovieViewModel.MovieData(
+                MovieViewModel.MovieStatus.GO_BACK,
                 emptyList()
             ),
             testObserver.observedValues[0]

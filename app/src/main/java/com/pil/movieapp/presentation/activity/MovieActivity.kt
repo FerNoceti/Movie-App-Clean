@@ -33,19 +33,19 @@ class MovieActivity : AppCompatActivity(), KoinComponent {
         viewModel.callService()
     }
 
-    private fun updateUI(data: MovieViewModel.MainData) {
+    private fun updateUI(data: MovieViewModel.MovieData) {
         when (data.status) {
-            MovieViewModel.MainStatus.SHOW_INFO -> {
+            MovieViewModel.MovieStatus.SHOW_INFO -> {
                 binding.recycler.adapter = MovieAdapter(data.movies)
                 binding.recycler.layoutManager = LinearLayoutManager(this)
             }
 
-            MovieViewModel.MainStatus.EMPTY -> {
+            MovieViewModel.MovieStatus.EMPTY -> {
                 binding.recycler.visibility = View.GONE
                 binding.empty.visibility = View.VISIBLE
             }
 
-            MovieViewModel.MainStatus.GO_BACK -> {
+            MovieViewModel.MovieStatus.GO_BACK -> {
                 finish()
             }
         }

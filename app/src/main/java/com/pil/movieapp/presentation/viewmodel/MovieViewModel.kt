@@ -16,37 +16,37 @@ class MovieViewModel(
     private val getMoviesUseCase: GetMoviesUseCase
 ) : ViewModel(), KoinComponent {
 
-    private val mutableLiveData: MutableLiveData<MainData> = MutableLiveData()
-    fun getValue(): LiveData<MainData> = mutableLiveData
+    private val mutableLiveData: MutableLiveData<MovieData> = MutableLiveData()
+    fun getValue(): LiveData<MovieData> = mutableLiveData
 
     fun callService() = viewModelScope.launch {
         withContext(Dispatchers.IO) { getMoviesUseCase() }.let { result ->
             when (result) {
                 is CoroutineResult.Success -> {
                     if (result.data.isEmpty()) {
-                        mutableLiveData.value = MainData(MainStatus.EMPTY, emptyList())
+                        mutableLiveData.value = MovieData(MovieStatus.EMPTY, emptyList())
                     } else {
-                        mutableLiveData.value = MainData(MainStatus.SHOW_INFO, result.data)
+                        mutableLiveData.value = MovieData(MovieStatus.SHOW_INFO, result.data)
                     }
                 }
 
                 is CoroutineResult.Failure -> {
-                    mutableLiveData.value = MainData(MainStatus.EMPTY, emptyList())
+                    mutableLiveData.value = MovieData(MovieStatus.EMPTY, emptyList())
                 }
             }
         }
     }
 
     fun goBack() {
-        mutableLiveData.value = MainData(MainStatus.GO_BACK, emptyList())
+        mutableLiveData.value = MovieData(MovieStatus.GO_BACK, emptyList())
     }
 
-    data class MainData(
-        val status: MainStatus,
+    data class MovieData(
+        val status: MovieStatus,
         val movies: List<Movie>,
     )
 
-    enum class MainStatus {
+    enum class MovieStatus {
         SHOW_INFO,
         EMPTY,
         GO_BACK,

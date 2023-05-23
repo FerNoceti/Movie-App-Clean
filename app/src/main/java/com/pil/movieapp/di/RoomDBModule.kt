@@ -8,7 +8,7 @@ object RoomDBModule {
 
     val roomDBModule = module {
         single {
-            Room.databaseBuilder(get(), MoviesRoomDataBase::class.java, "MovieDataBase").build()
+            Room.databaseBuilder(get(), MoviesRoomDataBase::class.java, "Movie-DataBase").build()
         }
         single { get<MoviesRoomDataBase>().moviesDao() }
     }

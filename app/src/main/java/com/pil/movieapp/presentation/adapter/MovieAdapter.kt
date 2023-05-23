@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.pil.movieapp.domain.entity.Movie
 import com.pil.movieapp.R
 import com.pil.movieapp.databinding.ItemRecyclerBinding
+import com.pil.movieapp.domain.entity.Movie
 
 class MovieAdapter(private val movies: List<Movie>) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {

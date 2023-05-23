@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class MenuViewModel : ViewModel() {
 
     private val mutableLiveData: MutableLiveData<MenuStates> = MutableLiveData()
-     fun getValue(): LiveData<MenuStates> {
+    fun getValue(): LiveData<MenuStates> {
         return mutableLiveData
     }
 

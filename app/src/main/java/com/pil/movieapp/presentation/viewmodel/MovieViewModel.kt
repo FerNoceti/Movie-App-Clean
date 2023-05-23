@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pil.movieapp.domain.util.CoroutineResult
 import com.pil.movieapp.domain.entity.Movie
 import com.pil.movieapp.domain.usecase.GetMoviesUseCase
+import com.pil.movieapp.domain.util.CoroutineResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,6 +29,7 @@ class MovieViewModel(
                         mutableLiveData.value = MainData(MainStatus.SHOW_INFO, result.data)
                     }
                 }
+
                 is CoroutineResult.Failure -> {
                     mutableLiveData.value = MainData(MainStatus.EMPTY, emptyList())
                 }

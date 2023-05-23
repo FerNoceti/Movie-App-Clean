@@ -1,9 +1,9 @@
 package com.pil.movieapp.data.service
 
 import com.pil.movieapp.data.service.api.MovieClient
-import com.pil.movieapp.domain.service.MovieServiceInterface
 import com.pil.movieapp.data.service.mapper.mapToList
 import com.pil.movieapp.domain.entity.Movie
+import com.pil.movieapp.domain.service.MovieServiceInterface
 import com.pil.movieapp.domain.util.CoroutineResult
 
 

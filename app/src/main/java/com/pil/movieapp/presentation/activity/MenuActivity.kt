@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pil.movieapp.R
 import com.pil.movieapp.databinding.ActivityMainBinding
-import com.pil.movieapp.presentation.viewmodel.MenuViewModel
 import com.pil.movieapp.domain.util.Dialog
+import com.pil.movieapp.presentation.viewmodel.MenuViewModel
 import org.koin.android.ext.android.inject
 
 class MenuActivity : AppCompatActivity() {

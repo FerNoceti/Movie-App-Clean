@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Movie App</string>
+
+    <string name="card_overview">Overview: %1$s</string>
+    <string name="card_poster_path">https://image.tmdb.org/t/p/original%1$s</string>
+
+    <string name="description">This app shows the most popular movies from the TMDB API.</string>
+    <string name="button_menu_show">Show Most Popular Movies</string>
+    <string name="empty">No movies were found, check your connection or try again</string>
+
+    <string name="title_movie">Most Popular Movies</string>
+    <string name="button_movie_back">Back</string>
+    <string name="button_error">Make an Error</string>
+
+    <string name="image_desc">Image of the movie</string>
+    <string name="vote_average">Vote average:</string>
+
+    <string name="OK">OK</string>
+
+    <string name="error_title">Error</string>
+    <string name="error_message">An error occurred, please try again</string>
+
+</resources>

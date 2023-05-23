@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.pil.movieapp.domain.entity.Movie
 import com.pil.movieapp.domain.usecase.GetMoviesUseCase
 import com.pil.movieapp.domain.util.CoroutineResult
+import com.pil.movieapp.domain.viewmodel.MovieViewModelInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,12 +15,12 @@ import org.koin.core.component.KoinComponent
 
 class MovieViewModel(
     private val getMoviesUseCase: GetMoviesUseCase
-) : ViewModel(), KoinComponent {
+) : ViewModel(), KoinComponent, MovieViewModelInterface {
 
     private val mutableLiveData: MutableLiveData<MovieData> = MutableLiveData()
-    fun getValue(): LiveData<MovieData> = mutableLiveData
+    override fun getValue(): LiveData<MovieData> = mutableLiveData
 
-    fun callService() = viewModelScope.launch {
+    override fun callService() = viewModelScope.launch {
         withContext(Dispatchers.IO) { getMoviesUseCase() }.let { result ->
             when (result) {
                 is CoroutineResult.Success -> {
@@ -37,7 +38,7 @@ class MovieViewModel(
         }
     }
 
-    fun goBack() {
+    override fun goBack() {
         mutableLiveData.value = MovieData(MovieStatus.GO_BACK, emptyList())
     }
 

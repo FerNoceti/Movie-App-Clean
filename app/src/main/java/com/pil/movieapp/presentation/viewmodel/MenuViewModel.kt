@@ -3,19 +3,20 @@ package com.pil.movieapp.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.pil.movieapp.domain.viewmodel.MenuViewModelInterface
 
-class MenuViewModel : ViewModel() {
+class MenuViewModel : ViewModel(), MenuViewModelInterface {
 
     private val mutableLiveData: MutableLiveData<MenuStates> = MutableLiveData()
-    fun getValue(): LiveData<MenuStates> {
+    override fun getValue(): LiveData<MenuStates> {
         return mutableLiveData
     }
 
-    fun buttonPressed() {
+    override fun buttonPressed() {
         mutableLiveData.value = MenuStates.GO_TO_MOVIE_SCREEN
     }
 
-    fun buttonErrorPressed() {
+    override fun buttonErrorPressed() {
         mutableLiveData.value = MenuStates.ERROR
     }
 

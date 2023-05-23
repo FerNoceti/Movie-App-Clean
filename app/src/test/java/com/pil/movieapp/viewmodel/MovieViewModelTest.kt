@@ -1,13 +1,13 @@
-package com.pil.movieapp.mvvm.viewmodel
+package com.pil.movieapp.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.pil.movieapp.data.database.MovieDataBase
-import com.pil.movieapp.presentation.mvvm.model.MovieModel
 import com.pil.movieapp.data.service.MovieService
-import com.pil.movieapp.data.service.response.MovieResponse
+import com.pil.movieapp.domain.entity.Movie
+import com.pil.movieapp.domain.usecase.GetMoviesUseCase
+import com.pil.movieapp.domain.util.CoroutineResult
 import com.pil.movieapp.presentation.viewmodel.MovieViewModel
 import com.pil.movieapp.testObserver
-import com.pil.movieapp.domain.util.CoroutineResult
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.Dispatchers
@@ -26,17 +26,18 @@ class MovieViewModelTest {
 
     private val testDispatcher = UnconfinedTestDispatcher()
     private lateinit var movieViewModel: MovieViewModel
-    private lateinit var movieModel: MovieModel
+
+    @MockK
+    private lateinit var getMoviesUseCase: GetMoviesUseCase
 
     @MockK
     private lateinit var service: MovieService
 
     @MockK
     private lateinit var database: MovieDataBase
-    private val movies: List<MovieResponse> =
+    private val movies: List<Movie> =
         listOf(
-            MovieResponse(
-                id = 1,
+            Movie(
                 title = "title",
                 overview = "overview",
                 posterPath = "posterPath",
@@ -44,8 +45,6 @@ class MovieViewModelTest {
                 voteAverage = 1.0f,
                 voteCount = 1,
                 originalLanguage = "originalLanguage",
-                originalTitle = "originalTitle",
-                popularity = 1.0f,
             )
         )
 
@@ -56,14 +55,14 @@ class MovieViewModelTest {
     fun setUp() {
         MockKAnnotations.init(this, relaxed = true)
         Dispatchers.setMain(testDispatcher)
-        movieModel = spyk(MovieModel(service, database))
-        movieViewModel = MovieViewModel(movieModel)
+        getMoviesUseCase = spyk(GetMoviesUseCase(service, database))
+        movieViewModel = MovieViewModel(getMoviesUseCase)
     }
 
     @Test
     fun `set liveData with SHOW_INFO as value`() {
         // Given
-        coEvery { movieModel.getMovies() } returns CoroutineResult.Success(movies)
+        coEvery { getMoviesUseCase() } returns CoroutineResult.Success(movies)
         val testObserver = movieViewModel.getValue().testObserver()
 
         // When
@@ -82,7 +81,7 @@ class MovieViewModelTest {
     @Test
     fun `set liveData with EMPTY as value`() {
         // Given
-        coEvery { movieModel.getMovies() } returns CoroutineResult.Success(emptyList())
+        coEvery { getMoviesUseCase() } returns CoroutineResult.Success(emptyList())
         val testObserver = movieViewModel.getValue().testObserver()
 
         // When

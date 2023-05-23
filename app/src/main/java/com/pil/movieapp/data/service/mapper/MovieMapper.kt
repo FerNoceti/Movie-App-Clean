@@ -8,6 +8,7 @@ import com.pil.movieapp.domain.entity.Movie
 fun MovieList.mapToList(): List<Movie> {
     return results.map { movie ->
         Movie(
+            id = movie.id,
             title = movie.title,
             overview = movie.overview,
             posterPath = movie.posterPath,
@@ -21,6 +22,7 @@ fun MovieList.mapToList(): List<Movie> {
 
 fun MovieEntity.toMovie(): Movie {
     return Movie(
+        id = this.id,
         title = this.title,
         overview = this.overview,
         posterPath = this.posterPath,
@@ -33,6 +35,7 @@ fun MovieEntity.toMovie(): Movie {
 
 fun Movie.toMovieEntity(): MovieEntity {
     return MovieEntity(
+        id = this.id,
         title = this.title,
         overview = this.overview,
         posterPath = this.posterPath,

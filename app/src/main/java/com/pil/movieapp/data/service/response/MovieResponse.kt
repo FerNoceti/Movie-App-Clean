@@ -3,6 +3,8 @@ package com.pil.movieapp.data.service.response
 import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
+    @SerializedName("id")
+    var id: Int,
     @SerializedName("title")
     var title: String,
     @SerializedName("overview")

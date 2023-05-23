@@ -23,11 +23,14 @@ class MovieViewModel(
         withContext(Dispatchers.IO) { getMoviesUseCase() }.let { result ->
             when (result) {
                 is CoroutineResult.Success -> {
-                    mutableLiveData.value =
-                        MainData(status = MainStatus.SHOW_INFO, movies = result.data)
+                    if (result.data.isEmpty()) {
+                        mutableLiveData.value = MainData(MainStatus.EMPTY, emptyList())
+                    } else {
+                        mutableLiveData.value = MainData(MainStatus.SHOW_INFO, result.data)
+                    }
                 }
-
                 is CoroutineResult.Failure -> {
+                    mutableLiveData.value = MainData(MainStatus.EMPTY, emptyList())
                 }
             }
         }
